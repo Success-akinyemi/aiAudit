@@ -80,7 +80,7 @@ paths:
         500: 
           description: Server error
 
-  /api/student/forgotPassword:
+  /api/user/forgotPassword:
     post:
       summary: User forgot password request
       description: User forgot password request
@@ -103,7 +103,7 @@ paths:
         500: 
           description: Server error
 
-  /api/student/resetPassword/:resetToken:
+  /api/user/resetPassword/:resetToken:
     post:
       summary: User reset password request
       description: User reset password request

@@ -6,7 +6,7 @@ const mailGenerator = new Mailgen({
     theme: 'default',
     product: {
         name: 'AI Audit',
-        link: `${process.env.APP_LINK}`
+        link: `${process.env.CLIENT_URL}`
     }
 })
 
@@ -53,6 +53,7 @@ export async function registerUser(req, res) {
         res.status(500).json({ success: false, data: 'Failed to create account' })
     }
 }
+
 //LOGIN STUDENT
 export async function login(req, res) {
     const { email, password } = req.body 
@@ -103,8 +104,8 @@ export async function forgotPassword(req, res) {
         const resetToken = user.getStudentResetPasswordToken()
 
         await user.save()
-        //const resetUrl = `${process.env.APP_LINK}/reset-password/${resetToken}`
-        const resetUrl = `<a href=“eduafrica-mobile://reset-password/${resetToken}”></a>`
+        const resetUrl = `${process.env.CLIENT_URL}/reset-password/${resetToken}`
+        //const resetUrl = `<a href=“eduafrica-mobile://reset-password/${resetToken}”></a>`
         console.log('RESET TOKEN', resetToken)
         try {
             // send mail
@@ -151,7 +152,7 @@ export async function forgotPassword(req, res) {
             return res.status(500).json({ success: false, data: 'Email could not be sent' })
         }
     } catch (error) {
-        console.log('ERROR GENERATING STUDENT PASSWORD RESET LINK', error)
+        console.log('ERROR GENERATING USER PASSWORD RESET LINK', error)
         res.status(500).json({ success: false, data: 'Something went wrong' })
     }
 }
@@ -165,8 +166,8 @@ export async function resetPassword (req, res){
         if (!password || !confirmPassword) {
             return res.status(400).json({ success: false, data: 'Password and confirm password are required' });
         }
-        if (password.length < 8) {
-            return res.status(400).json({ success: false, data: 'Passwords must be at least 8 characters long' });
+        if (password.length < 6) {
+            return res.status(400).json({ success: false, data: 'Passwords must be at least 6 characters long' });
         }
 
         const specialChars = /[!@#$%^&*()_+{}[\]\\|;:'",.<>?]/;

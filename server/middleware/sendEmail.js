@@ -16,8 +16,8 @@ let transporter = nodemailer.createTransport(nodeConfig);
 let MailGenerator = new Mailgen({
     theme: 'default',
     product: {
-        name: "EDTECH AFRIC",
-        link: 'http://www.google.com'
+        name: "AI AUDIT",
+        link: 'https://audit-genie-frontend.vercel.app'
     }
 })
 
