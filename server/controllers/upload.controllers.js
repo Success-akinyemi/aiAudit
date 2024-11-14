@@ -52,8 +52,12 @@ export async function getADocument(req, res) {
   const { id } = req.params
 
   try {
-    const allDocuments = await DocumentModel.find({ _id: id })
-  
+    const allDocuments = await DocumentModel.findById({ _id: id })
+    
+    if(!allDocuments){
+      return res.status(404).json({ success: false, data: 'Document with this ID not Found' })
+    }
+
     if(allDocuments?.userId !== _id){
       return res.status(403).json({ success: false, data: 'You can only access documents you upload.' })
     }
