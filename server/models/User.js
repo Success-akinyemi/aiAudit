@@ -47,7 +47,11 @@ UserSchema.methods.matchStudentPasswords = async function(password){
 }
 
 UserSchema.methods.getStudentSignedToken = function(){
-    return jsonwebtoken.sign({ id: this._id, verified: this.verified, userType: this.accountType }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE})
+    return jsonwebtoken.sign({ id: this._id, email: this.email }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE})
+}
+
+UserSchema.methods.getStudentSignedPublicToken = function(){
+    return jsonwebtoken.sign({ id: this.fullName, type: 'public' }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE})
 }
 
 UserSchema.methods.getStudentResetPasswordToken = function(){

@@ -5,6 +5,9 @@ const router = express.Router()
 
 router.post('/upload-doc', controllers.uploadFile )
 
-//PUT ROUTES
+//GET ROUTES
+router.get('/getAllDocuments', controllers.getAllDocuments )
+router.get('/getADocument/:id', controllers.getADocument )
+
 
 export default router

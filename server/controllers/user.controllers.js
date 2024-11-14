@@ -75,9 +75,11 @@ export async function login(req, res) {
 
         //SEND TOKEN
         const token = user.getStudentSignedToken();
+        const publicToken = user.getStudentSignedPublicToken();
+
         const expiryDate = new Date(Date.now() + 10 * 60 * 60 * 1000)
         const { resetPasswordToken, resetPasswordExpire, password: hashedPassword, _id, ...userData } = user._doc
-        res.cookie('aiauditsigned', token, { httpOnly: true, expires: expiryDate, sameSite: 'None', secure: true } ).status(201).json({ success: true, token: token, data: {success: true, data: userData }})
+        res.cookie('aiauditsigned', publicToken, { httpOnly: true, expires: expiryDate, sameSite: 'None', secure: true } ).status(201).json({ success: true, token: token, data: {success: true, data: userData }})
         
     } catch (error) {
         console.log(`UNABLE TO LOGIN USER WITH EMAIL: (${email})`, error)
