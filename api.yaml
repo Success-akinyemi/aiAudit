@@ -1,0 +1,166 @@
+swagger: '2.0'
+info: 
+  title: AI Audit API Documentation
+  description: API documentation for Ai Audit. Each request comes with a cookie sent from the client.
+  version: 1.0
+  contact: 
+    email: successakinyemi365@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://apache.org/'
+host: eduafric.onrender.com
+basePath: /               
+schemes:
+  - https
+
+paths:
+  /:
+    get:
+      summary: Home GET request
+      description: The first request to check server
+      responses:
+        200:
+          description: Success
+
+  /api/user/register:
+    post:
+      summary: Register new User
+      description: Register a user
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - email
+              - fullName
+              - password
+              - confirmPassword
+            properties:
+              email:
+                type: string
+              fullName:
+                type: string
+              password:
+                type: string
+              confirmPassword:
+                type: string
+      responses:
+        201: 
+          description: Account created 
+        400:
+          description: User error
+        500: 
+          description: Server error
+
+  /api/user/login:
+    post:
+      summary: User Login
+      description: Login a user
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - email
+              - password
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+      responses:
+        201: 
+          description: Login successful
+        400:
+          description: User error
+        500: 
+          description: Server error
+
+  /api/student/forgotPassword:
+    post:
+      summary: User forgot password request
+      description: User forgot password request
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - email
+            properties:
+              email:
+                type: string
+      responses:
+        200: 
+          description: Email sent
+        400:
+          description: User error
+        500: 
+          description: Server error
+
+  /api/student/resetPassword/:resetToken:
+    post:
+      summary: User reset password request
+      description: User reset password request
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - password
+              - confirmPassword
+              - resetToken (params)
+            properties:
+              password:
+                type: string
+              confirmPassword:
+                type: string
+      responses:
+        200: 
+          description: Password Reset successful
+        400:
+          description: User error
+        500: 
+          description: Server error
+
+  /api/file/upload-doc:
+    post:
+      summary: Upload file to server
+      description: Upload recivied file form client (Accepts only pdf and excel file format)
+      responses:
+        201: 
+          description: file Uplaoded Successful
+        400:
+          description: User error
+        500: 
+          description: Server error
+
+  /api/aiChat/aiChat:
+    post:
+      summary: Chat bot api
+      description: Chat api for user
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              message:
+                type: string
+      responses:
+        201: 
+          description: 'Messages'
+        400:
+          description: User error
+        500: 
+          description: Server error
