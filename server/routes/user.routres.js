@@ -10,6 +10,9 @@ router.post('/forgotPassword', controllers.forgotPassword )
 router.post('/resetPassword/:resetToken', controllers.resetPassword )
 router.post('/updateProfile', Protect, controllers.updateProfile )
 
+router.post('/signout', controllers.signout )
+
+
 
 //PUT ROUTES
 

@@ -130,6 +130,38 @@ paths:
         500: 
           description: Server error
 
+  /api/user/updateProfile:
+    post:
+      summary: User update their profile
+      description: user can update either full name or password
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              fullName:
+                type: string
+              password:
+                type: string
+      responses:
+        201: 
+          description: Account created 
+        400:
+          description: User error
+        500: 
+          description: Server error
+
+
+  /api/user/signout:
+    post:
+      summary: Signout
+      description: Signout a user
+      responses:
+        200:
+          description: Success
+
   /api/file/upload-doc:
     post:
       summary: Upload file to server

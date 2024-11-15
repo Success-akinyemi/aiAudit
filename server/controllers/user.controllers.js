@@ -232,3 +232,7 @@ export async function updateProfile(req, res){
     }
 }
 
+//USER LOGOUT
+export async function signout(req, res){
+    res.clearCookie('aiauditsigned').status(200).json({success: true, data: 'Signout success'})
+}
